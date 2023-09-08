@@ -6,8 +6,7 @@
   <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
   <script>
     (async ($) => {
-
-      let apiServer = "http://localhost:8888";
+      let apiServer = "https://mtx-plaid.poldiwa.com";
       // Grab a Link token to initialize Link
       const createLinkToken = async () => {
         const res = await fetch(`${apiServer}/api/create_link_token`);

@@ -8,7 +8,7 @@
     <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
     <script>
       (($) => {
-        let apiServer = "http://localhost:8888";
+        let apiServer = "https://mtx-plaid.poldiwa.com";
         const linkToken = localStorage.getItem("link_token");
 
         const handler = Plaid.create({
