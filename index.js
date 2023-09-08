@@ -10,13 +10,14 @@ const session = require("express-session");
 const { Configuration, PlaidApi, PlaidEnvironments } = require("plaid");
 const path = require("path");
 const app = express();
+const cors = require('cors')
 
 app.use(
   // FOR DEMO PURPOSES ONLY
   // Use an actual secret key in production
   session({ secret: "bosco", saveUninitialized: true, resave: true })
 );
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
