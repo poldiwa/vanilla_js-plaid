@@ -48,43 +48,43 @@
       $('pre').html(
         window.location.search
       )
-    })(jQuery);
 
-    // Retrieves balance information
-    const getBalance = async function () {
-      const response = await fetch(`${apiServer}/api/data`, {
-        method: "GET",
-      });
-      const data = await response.json();
+      // Retrieves balance information
+      const getBalance = async function () {
+        const response = await fetch(`${apiServer}/api/data`, {
+          method: "GET",
+        });
+        const data = await response.json();
 
-      //Render response data
-      const pre = document.getElementById("response");
-      pre.textContent = JSON.stringify(data, null, 2);
-      pre.style.background = "#F6F6F6";
+        //Render response data
+        const pre = document.getElementById("response");
+        pre.textContent = JSON.stringify(data, null, 2);
+        pre.style.background = "#F6F6F6";
 
-      try {
-        let url = new URL(localStorage.getItem("decision_url"))
-        let callBackURL = url.searchParams.get("callBackURL")
-        let flowTrackingId = url.searchParams.get("flowTrackingId")
-        let stepTrackingId = url.searchParams.get("stepTrackingId")
-        if (callBackURL) {
-          window.location.href = `${callBackURL}&flowTrackingId=${flowTrackingId}&stepTrackingId=${stepTrackingId}&OutcomePath=Done&data=${JSON.stringify(data)}`
+        try {
+          let url = new URL(localStorage.getItem("decision_url"))
+          let callBackURL = url.searchParams.get("callBackURL")
+          let flowTrackingId = url.searchParams.get("flowTrackingId")
+          let stepTrackingId = url.searchParams.get("stepTrackingId")
+          if (callBackURL) {
+            window.location.href = `${callBackURL}&flowTrackingId=${flowTrackingId}&stepTrackingId=${stepTrackingId}&OutcomePath=Done&data=${JSON.stringify(data)}`
+          }
+        } catch (e) {
+
         }
-      } catch (e) {
+      };
 
-      }
-    };
+      // Check whether account is connected
+      const getStatus = async function () {
+        const account = await fetch(`${apiServer}/api/is_account_connected`);
+        const connected = await account.json();
+        if (connected.status == true) {
+          getBalance();
+        }
+      };
 
-    // Check whether account is connected
-    const getStatus = async function () {
-      const account = await fetch(`${apiServer}/api/is_account_connected`);
-      const connected = await account.json();
-      if (connected.status == true) {
-        getBalance();
-      }
-    };
-
-    getStatus();
+      getStatus();
+    })(jQuery);
   </script>
 </head>
 <title>Plaid | Minimal Quickstart</title>
