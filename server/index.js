@@ -21,11 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", async (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "../client/index.html"));
 });
 
 app.get("/oauth", async (req, res) => {
-  res.sendFile(path.join(__dirname, "oauth.html"));
+  res.sendFile(path.join(__dirname, "../client/oauth.html"));
+});
+
+app.get("/success", async (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/success.html"));
 });
 
 // Configuration for the Plaid client

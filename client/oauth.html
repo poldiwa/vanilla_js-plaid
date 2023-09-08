@@ -8,13 +8,14 @@
     <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
     <script>
       (($) => {
+        let apiServer = "http://localhost:8888";
         const linkToken = localStorage.getItem("link_token");
 
         const handler = Plaid.create({
           token: linkToken,
           receivedRedirectUri: window.location.href,
           onSuccess: async (publicToken, metadata) => {
-            await fetch("/api/exchange_public_token", {
+            await fetch(`${apiServer}/api/exchange_public_token`, {
               method: "POST",
               body: JSON.stringify({ public_token: publicToken }),
               headers: {
@@ -25,7 +26,7 @@
               method: 'GET',
             });
             const data = await response.json();
-            window.location.href = "http://157.245.53.107:8888";          
+            window.location.href = "/";          
           },
           onEvent: (eventName, metadata) => {
             console.log("Event:", eventName);

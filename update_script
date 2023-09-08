@@ -1,0 +1,4 @@
+
+aws s3 sync./ www s3://mtx-plaid.markertrax.io --profile=mt --delete
+
+aws cloudfront create-invalidation --profile=mt --distribution-id E118UTLR2TUV59 --paths "/*"
