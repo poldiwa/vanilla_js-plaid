@@ -27,8 +27,9 @@
             headers: {
               "Content-Type": "application/json",
             },
-          });
-          await getBalance();
+          }).then((response) => {
+            return getBalance(response.data.access_token);
+          })
         },
         onEvent: (eventName, metadata) => {
           console.log("Event:", eventName);
@@ -50,9 +51,10 @@
       )
 
       // Retrieves balance information
-      const getBalance = async function () {
+      const getBalance = async function (access_token) {
         const response = await fetch(`${apiServer}/api/data`, {
           method: "GET",
+          body: JSON.stringify({ access_token }),
         });
         const data = await response.json();
 
@@ -83,7 +85,7 @@
         }
       };
 
-      getStatus();
+      // getStatus();
     })(jQuery);
   </script>
 </head>
