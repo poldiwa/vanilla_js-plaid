@@ -71,7 +71,7 @@ app.post("/api/exchange_public_token", async (req, res, next) => {
   // FOR DEMO PURPOSES ONLY
   // Store access_token in DB instead of session storage
   req.session.access_token = exchangeResponse.data.access_token;
-  res.json({ access_token });
+  res.json({ access_token: exchangeResponse.data.access_token });
 });
 
 // Fetches balance data using the Node client library for Plaid
