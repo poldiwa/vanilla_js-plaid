@@ -52,9 +52,8 @@
 
       // Retrieves balance information
       const getBalance = async function (access_token) {
-        const response = await fetch(`${apiServer}/api/data`, {
+        const response = await fetch(`${apiServer}/api/data?access_token=${access_token}`, {
           method: "GET",
-          body: JSON.stringify({ access_token }),
         });
         const data = await response.json();
 
