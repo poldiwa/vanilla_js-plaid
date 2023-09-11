@@ -27,8 +27,8 @@
             headers: {
               "Content-Type": "application/json",
             },
-          }).then((response) => {
-            return getBalance(response.data.access_token);
+          }).then(r => r.json()).then((data) => {
+            return getBalance(data.access_token);
           })
         },
         onEvent: (eventName, metadata) => {
