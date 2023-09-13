@@ -55,7 +55,7 @@ app.get("/api/create_link_token", async (req, res, next) => {
     user: { client_user_id: req.sessionID },
     client_name: "Plaid's Tiny Quickstart",
     language: "en",
-    products: ["auth"],
+    products: ["auth", "identity"],
     country_codes: ["US"],
     redirect_uri: process.env.PLAID_SANDBOX_REDIRECT_URI,
   });
@@ -83,10 +83,19 @@ app.get("/api/data", async (req, res, next) => {
   });
 });
 
+app.get("/api/identity", async (req, res, next) => {
+  const access_token = req.query.access_token;
+  const accountResponse = await client.identityGet({ access_token });
+
+  res.json({
+    Accounts: accountResponse.data,
+  });
+});
+
 // Checks whether the user's account is connected, called
 // in index.html when redirected from oauth.html
 app.get("/api/is_account_connected", async (req, res, next) => {
-  return (req.session.access_token ? res.json({ status: true }) : res.json({ status: false}));
+  return (req.session.access_token ? res.json({ status: true }) : res.json({ status: false }));
 });
 
 app.listen(process.env.PORT || 8080);
