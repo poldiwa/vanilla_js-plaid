@@ -1,0 +1,14 @@
+[
+	{
+		"relation": [
+			"delegate_permission/common.handle_all_urls"
+		],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.koinwalletv2demo.mobileapp",
+			"sha256_cert_fingerprints": [
+				"B7:F3:DA:DE:89:36:62:2B:A8:E5:7C:6B:10:FA:23:81:FA:8B:7C:38:AC:77:FC:61:91:54:50:74:9D:CC:5B:AD"
+			]
+		}
+	}
+]
